@@ -49,6 +49,7 @@ function getNumberProperties(num: number): string[] {
 
 function getDigitSum(num: number): number {
   let sum = 0;
+  num = Math.abs(num); // Handle negative numbers by taking the absolute value
   while (num > 0) {
     sum += num % 10;
     num = Math.floor(num / 10);
@@ -82,7 +83,7 @@ export async function GET(request: NextRequest) {
       { status: 400 }
     );
   }
-  const isNumber = /^\d+$/.test(params);
+  const isNumber = /^-?\d+$/.test(params);
 
   if (!isNumber) {
     return NextResponse.json(
